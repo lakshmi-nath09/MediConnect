@@ -97,3 +97,26 @@ button:active { transform: translateY(0); }
 }
 
 #successMessage:not(.hidden) { animation: fadeIn 0.5s ease-out; }
+/* Print Button Style */
+.btn-print {
+    background: #2d3748;
+    margin-top: 10px;
+}
+
+.btn-print:hover {
+    background: #1a202c;
+}
+
+/* Print Logic: This hides everything EXCEPT the receipt when printing */
+@media print {
+    body * { visibility: hidden; }
+    #printableArea, #printableArea * { visibility: visible; }
+    #printableArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        border: 2px solid #000;
+        padding: 20px;
+    }
+}
