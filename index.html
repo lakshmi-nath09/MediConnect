@@ -18,17 +18,17 @@
         <form id="appointmentForm">
             <div class="input-group">
                 <label>Full Name</label>
-                <input type="text" id="userName" placeholder="Enter your name" required>
+                <input type="text" name="Name" id="userName" placeholder="Enter your name" required>
             </div>
 
             <div class="input-group">
                 <label>Phone Number</label>
-                <input type="tel" id="userPhone" placeholder="+1 (555) 000-0000" required>
+                <input type="tel" name="Phone" id="userPhone" placeholder="+1 (555) 000-0000" required>
             </div>
 
             <div class="input-group">
                 <label>Department</label>
-                <select id="dept" required>
+                <select name="Department" id="dept" required>
                     <option value="" disabled selected>Choose a department</option>
                     <option value="General">General Consultation</option>
                     <option value="Cardiology">Cardiology</option>
@@ -41,11 +41,11 @@
             <div class="row">
                 <div class="input-group">
                     <label>Date</label>
-                    <input type="date" id="appDate" required>
+                    <input type="date" name="Date" id="appDate" required>
                 </div>
                 <div class="input-group">
                     <label>Time</label>
-                    <input type="time" id="appTime" required>
+                    <input type="time" name="Time" id="appTime" required>
                 </div>
             </div>
 
@@ -53,10 +53,18 @@
         </form>
 
         <div id="successMessage" class="hidden">
-            <div class="success-icon">Ready!</div>
-            <h3>Request Received</h3>
-            <p>An agent will call you shortly to confirm your slot at <strong>CareFlow</strong>.</p>
-            <button onclick="location.reload()" class="btn-secondary">Book Another</button>
+            <div class="success-icon">❤️</div>
+            <h3>Thank You for Booking!</h3>
+            
+            <div class="appointment-id-box">
+                <p>Your Appointment ID</p>
+                <h2 id="displayID">#CF-0000</h2>
+            </div>
+
+            <p>Your request has been received. We look forward to seeing you at <strong>CareFlow</strong>.</p>
+            <p style="font-size: 0.85rem; color: #64748b; margin-top: 10px;">Please save this ID for your visit and arrive 10 minutes early.</p>
+            
+            <button onclick="location.reload()" class="btn-secondary">Book Another Appointment</button>
         </div>
     </div>
 
