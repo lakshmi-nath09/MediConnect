@@ -1,122 +1,169 @@
-/* General Setup */
+/* --- 1. Variables & Reset --- */
 :root {
     --primary: #007bff;
-    --primary-hover: #0056b3;
-    --success: #48bb78;
-    --bg: #f8fafc;
-    --text: #1e293b;
-    --border: #e2e8f0;
+    --primary-dark: #0056b3;
+    --secondary: #6c757d;
+    --bg-light: #f4f7f6;
+    --white: #ffffff;
+    --text-dark: #1e293b;
+    --shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+    background-color: var(--bg-light);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    margin: 0;
+    padding: 20px;
 }
 
+/* --- 2. Main Container --- */
 .appointment-card {
-    background: white;
-    padding: 2.5rem;
-    border-radius: 20px;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    background: var(--white);
     width: 100%;
-    max-width: 420px;
-    text-align: center;
+    max-width: 500px;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
 }
 
-/* Header */
-.header { margin-bottom: 2rem; }
-.logo { font-size: 2.5rem; margin-bottom: 0.5rem; }
-.header h1 { margin: 0; color: var(--text); font-size: 1.8rem; }
-.header p { color: #64748b; font-size: 0.9rem; margin-top: 5px; }
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
 
-/* Form Elements */
-.input-group { margin-bottom: 1.2rem; text-align: left; }
-label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: #475569; }
+.logo {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+h1 { color: var(--text-dark); margin-bottom: 5px; }
+p { color: #64748b; font-size: 0.9rem; }
+
+/* --- 3. Form Elements --- */
+.input-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+}
 
 input, select {
-    width: 100%;
-    padding: 0.8rem;
-    border: 2px solid var(--border);
-    border-radius: 10px;
+    padding: 12px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
     font-size: 1rem;
     transition: all 0.3s ease;
-    box-sizing: border-box;
 }
 
 input:focus, select:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
+    background-color: #f0f7ff;
 }
 
-.row { display: flex; gap: 1rem; }
+.row {
+    display: flex;
+    gap: 15px;
+}
 
-/* Button */
+.row .input-group { flex: 1; }
+
+/* --- 4. Buttons --- */
 button {
     width: 100%;
-    background: var(--primary);
-    color: white;
-    padding: 1rem;
+    padding: 14px;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     font-size: 1rem;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
-    transition: transform 0.2s, background 0.2s;
-    margin-top: 1rem;
+    transition: all 0.3s;
+    margin-top: 10px;
+    color: white;
+    background: var(--primary);
 }
 
-button:hover { background: var(--primary-hover); transform: translateY(-1px); }
-button:active { transform: translateY(0); }
+button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
 
-.btn-secondary { background: #64748b; margin-top: 1.5rem; }
+.btn-secondary {
+    background: var(--secondary);
+    margin-top: 15px;
+}
 
-/* Success ID Box */
+.btn-print {
+    background: #2d3748;
+}
+
+button:disabled {
+    background: #cbd5e0;
+    cursor: not-allowed;
+}
+
+/* --- 5. Success State & Receipt --- */
+.hidden { display: none; }
+
+#successMessage {
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
 .appointment-id-box {
-    background: #f1f5f9;
-    border: 2px dashed #cbd5e0;
+    background: #f8fafc;
+    border: 2px dashed var(--primary);
     padding: 20px;
-    border-radius: 12px;
+    border-radius: 10px;
     margin: 20px 0;
 }
 
-.appointment-id-box p { margin: 0; font-size: 0.75rem; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
-#displayID { margin: 8px 0 0 0; color: var(--primary); font-family: 'Courier New', monospace; font-size: 2rem; }
-
-.hidden { display: none; }
-.success-icon { font-size: 3rem; margin-bottom: 1rem; }
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+/* --- 6. Responsive Fixes (Phone) --- */
+@media (max-width: 480px) {
+    .appointment-card { padding: 25px; }
+    .row { flex-direction: column; gap: 0; }
+    
+    footer {
+        padding: 20px 0;
+        text-align: center;
+    }
 }
 
-#successMessage:not(.hidden) { animation: fadeIn 0.5s ease-out; }
-/* Print Button Style */
-.btn-print {
-    background: #2d3748;
-    margin-top: 10px;
-}
-
-.btn-print:hover {
-    background: #1a202c;
-}
-
-/* Print Logic: This hides everything EXCEPT the receipt when printing */
+/* --- 7. Print Settings (Centered) --- */
 @media print {
     body * { visibility: hidden; }
     #printableArea, #printableArea * { visibility: visible; }
+    
     #printableArea {
         position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
+        left: 50%;
+        top: 15%;
+        transform: translateX(-50%);
+        width: 80%;
+        max-width: 450px;
         border: 2px solid #000;
-        padding: 20px;
+        padding: 30px;
+        text-align: center;
+        border-radius: 0; /* Traditional paper look */
+        background-color: white !important;
     }
 }
