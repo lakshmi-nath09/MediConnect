@@ -8,102 +8,104 @@
 </head>
 <body>
 
-    <div class="appointment-card">
-        <div class="header">
-            <div class="logo">➕</div>
-            <h1>MediConnect</h1>
-            <p>Quality care is just a click away.</p>
+    <div class="main-wrapper">
+        <div class="appointment-card">
+            <div class="header">
+                <div class="logo">➕</div>
+                <h1>MediConnect</h1>
+                <p>Quality care is just a click away.</p>
+            </div>
+
+            <form id="appointmentForm">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" name="Name" id="userName" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Phone Number</label>
+                    <input type="tel" name="Phone" id="userPhone" placeholder="+1 (555) 000-0000" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Department</label>
+                    <select name="Department" id="dept" required>
+                        <option value="" disabled selected>Choose a department</option>
+                        
+                        <optgroup label="Primary Care">
+                            <option value="General Medicine">🩺 General Medicine</option>
+                            <option value="Pediatrics">👶 Pediatrics (Child Care)</option>
+                            <option value="Emergency">🚨 Emergency Room</option>
+                        </optgroup>
+
+                        <optgroup label="Specialized Care">
+                            <option value="Cardiology">❤️ Cardiology (Heart)</option>
+                            <option value="Neurology">🧠 Neurology (Brain/Nerves)</option>
+                            <option value="Orthopedics">🦴 Orthopedics (Bones)</option>
+                            <option value="Dermatology">✨ Dermatology (Skin)</option>
+                            <option value="Gastroenterology">🍕 Gastroenterology</option>
+                        </optgroup>
+
+                        <optgroup label="Therapy & Wellness">
+                            <option value="Psychiatry">🌿 Psychiatry/Mental Health</option>
+                            <option value="Physiotherapy">🏃 Physiotherapy</option>
+                            <option value="Nutrition">🥗 Diet & Nutrition</option>
+                        </optgroup>
+
+                        <optgroup label="Specialized Services">
+                            <option value="Dental">🦷 Dental Care</option>
+                            <option value="Ophthalmology">👁️ Ophthalmology (Eye)</option>
+                            <option value="ENT">👂 ENT (Ear, Nose, Throat)</option>
+                        </optgroup>
+
+                        <optgroup label="Diagnostics">
+                            <option value="Radiology">🩻 Radiology (X-Ray/MRI)</option>
+                            <option value="Pathology">🧪 Pathology (Lab Tests)</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="row">
+                    <div class="input-group">
+                        <label>Date</label>
+                        <input type="date" name="Date" id="appDate" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Time</label>
+                        <input type="time" name="Time" id="appTime" required>
+                    </div>
+                </div>
+
+                <div class="input-group checkbox-row">
+                    <input type="checkbox" id="privacy" required>
+                    <label for="privacy">I agree to the privacy policy and data processing.</label>
+                </div>
+
+                <button type="submit" id="submitBtn">Request Appointment</button>
+            </form>
+
+            <div id="successMessage" class="hidden">
+                <div class="success-icon">❤️</div>
+                <h3>Thank You for Booking!</h3>
+                
+                <div class="appointment-id-box" id="printableArea">
+                    <p style="margin-bottom: 5px; color: #64748b;">Your Appointment ID</p>
+                    <h2 id="displayID" style="color: #1e293b; letter-spacing: 2px;">#CF-0000</h2>
+                    <hr style="margin: 15px 0; border: 0; border-top: 1px solid #e2e8f0;">
+                    <p id="receiptName" style="font-weight: 600; color: #007bff;"></p>
+                    <p id="receiptDateTime" style="font-size: 0.9rem; color: #475569;"></p>
+                    <p style="font-size: 0.7rem; color: #94a3b8; margin-top: 10px;">MediConnect Digital Receipt</p>
+                </div>
+
+                <button onclick="window.print()" class="btn-print">🖨️ Print Receipt</button>
+                <button onclick="location.reload()" class="btn-secondary">Book Another Appointment</button>
+            </div>
         </div>
 
-        <form id="appointmentForm">
-            <div class="input-group">
-                <label>Full Name</label>
-                <input type="text" name="Name" id="userName" placeholder="Enter your name" required>
-            </div>
-
-            <div class="input-group">
-                <label>Phone Number</label>
-                <input type="tel" name="Phone" id="userPhone" placeholder="+1 (555) 000-0000" required>
-            </div>
-
-            <div class="input-group">
-                <label>Department</label>
-                <select name="Department" id="dept" required>
-                    <option value="" disabled selected>Choose a department</option>
-                    
-                    <optgroup label="Primary Care">
-                        <option value="General">🩺 General Consultation</option>
-                        <option value="Pediatrics">👶 Pediatrics (Child Care)</option>
-                        <option value="Internal Medicine">🏥 Internal Medicine</option>
-                    </optgroup>
-
-                    <optgroup label="Specialized Care">
-                        <option value="Cardiology">❤️ Cardiology (Heart)</option>
-                        <option value="Neurology">🧠 Neurology (Brain)</option>
-                        <option value="Orthopedics">🦴 Orthopedics (Bones)</option>
-                        <option value="Dermatology">✨ Dermatology (Skin)</option>
-                    </optgroup>
-
-                    <optgroup label="Specialized Services">
-                        <option value="Dental">🦷 Dental Care</option>
-                        <option value="Ophthalmology">👁️ Eye Care</option>
-                        <option value="ENT">👂 ENT (Ear, Nose, Throat)</option>
-                        <option value="Physiotherapy">🏃 Physiotherapy</option>
-                        <option value="Psychiatry">🌿 Mental Health</option>
-                    </optgroup>
-
-                    <optgroup label="Diagnostics">
-                        <option value="Radiology">🩻 Radiology (X-Ray/MRI)</option>
-                        <option value="Pathology">🧪 Laboratory / Blood Test</option>
-                    </optgroup>
-                </select>
-            </div>
-
-            <div class="row">
-                <div class="input-group">
-                    <label>Date</label>
-                    <input type="date" name="Date" id="appDate" required>
-                </div>
-                <div class="input-group">
-                    <label>Time</label>
-                    <input type="time" name="Time" id="appTime" required>
-                </div>
-            </div>
-
-            <div class="input-group" style="flex-direction: row; align-items: center; gap: 10px; display: flex;">
-                <input type="checkbox" id="privacy" required style="width: auto; margin-top: 0;">
-                <label for="privacy" style="font-size: 0.75rem; margin-bottom: 0;">
-                    I agree to the privacy policy and data processing.
-                </label>
-            </div>
-
-            <button type="submit" id="submitBtn">Request Appointment</button>
-        </form>
-
-        <div id="successMessage" class="hidden">
-            <div class="success-icon">❤️</div>
-            <h3>Thank You for Booking!</h3>
-            
-            <div class="appointment-id-box" id="printableArea">
-                <p>Your Appointment ID</p>
-                <h2 id="displayID">#CF-0000</h2>
-                <p id="receiptName" style="font-size: 1rem; color: #1e293b; margin-top: 10px; font-weight: 600;"></p>
-                <p id="receiptDateTime" style="font-size: 0.85rem; color: #64748b;"></p>
-                <p style="font-size: 0.7rem; color: #94a3b8; margin-top: 10px; border-top: 1px solid #e2e8f0; padding-top: 5px;">
-                    MediConnect Digital Receipt
-                </p>
-            </div>
-
-            <p style="font-size: 0.9rem; color: #475569;">Please arrive 10 minutes early with your ID.</p>
-            
-            <button onclick="window.print()" class="btn-print">🖨️ Print Receipt</button>
-            <button onclick="location.reload()" class="btn-secondary">Book Another Appointment</button>
-        </div>
+        <footer class="hospital-footer">
+            <p>© 2026 MediConnect Healthcare Systems</p>
+        </footer>
     </div>
-
-    <footer style="text-align: center; margin-top: 20px; color: #64748b; font-size: 0.8rem;">
-        <p>© 2026 MediConnect Healthcare Systems</p>
-    </footer>
 
     <script src="script.js"></script>
 </body>
