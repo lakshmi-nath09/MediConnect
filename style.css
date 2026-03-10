@@ -1,7 +1,14 @@
-/* General Styles */
+:root {
+    --primary: #007bff;
+    --primary-hover: #0056b3;
+    --bg: #f8fafc;
+    --text: #1e293b;
+    --border: #e2e8f0;
+}
+
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background-color: #f0f4f8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,99 +17,58 @@ body {
 }
 
 .appointment-card {
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 450px;
+    max-width: 420px;
 }
 
-.header {
-    text-align: center;
-    margin-bottom: 30px;
-}
+.header { text-align: center; margin-bottom: 2rem; }
+.logo { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.header h1 { margin: 0; color: var(--text); font-size: 1.8rem; }
+.header p { color: #64748b; font-size: 0.9rem; }
 
-.header h1 {
-    color: #2d3748;
-    margin: 0;
-    font-size: 28px;
-    letter-spacing: -0.5px;
-}
+.input-group { margin-bottom: 1.2rem; }
+label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: #475569; }
 
-.header p {
-    color: #718096;
-    font-size: 14px;
-}
-
-/* Form Styles */
-.input-group {
-    margin-bottom: 20px;
-}
-
-.row {
-    display: flex;
-    gap: 15px;
-}
-
-label {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    color: #4a5568;
-    margin-bottom: 8px;
-}
-
-input {
+input, select {
     width: 100%;
-    padding: 12px;
-    border: 1.5px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: border-color 0.2s;
+    padding: 0.8rem;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
     box-sizing: border-box;
 }
 
-input:focus {
+input:focus, select:focus {
     outline: none;
-    border-color: #4299e1;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
 }
+
+.row { display: flex; gap: 1rem; }
 
 button {
     width: 100%;
-    background-color: #4299e1;
+    background: var(--primary);
     color: white;
-    padding: 14px;
+    padding: 1rem;
     border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.2s;
+    margin-top: 1rem;
 }
 
-button:hover {
-    background-color: #3182ce;
-}
+button:hover { background: var(--primary-hover); }
 
-/* Success Message State */
-.hidden {
-    display: none;
-}
+.btn-secondary { background: #64748b; margin-top: 1.5rem; }
 
-#successMessage {
-    text-align: center;
-    padding: 20px;
-    animation: fadeIn 0.5s ease;
-}
-
-.check-icon {
-    font-size: 50px;
-    color: #48bb78;
-    margin-bottom: 10px;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+.hidden { display: none; }
+#successMessage { text-align: center; padding: 1rem; animation: slideUp 0.4s ease-out; }
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
