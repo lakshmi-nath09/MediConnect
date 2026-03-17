@@ -44,11 +44,21 @@
                 </div>
 
                 <div class="input-group">
-                    <button type="button" id="find-location-btn" class="btn-secondary">
-                        <i class="fa-solid fa-location-crosshairs"></i> Find Hospitals Near Me
-                    </button>
-                    <p id="location-status" style="font-size: 0.8rem; color: #64748b; text-align: center; margin-top: 5px; min-height: 1.2rem;"></p>
-                </div>
+    <label>Select Hospital</label>
+    <select name="Hospital" id="hospital" required>
+        <option value="" disabled selected>Choose a hospital</option>
+        
+        <optgroup label="Recommended Nearby" id="nearby-hospitals">
+            <option value="General Hospital">📍 Select location for suggestions</option>
+        </optgroup>
+
+        <optgroup label="Main Branches">
+            <option value="Apollo Hospitals">🏥 Apollo Hospitals</option>
+            <option value="Care Hospitals">🏥 Care Hospitals</option>
+            <option value="Yashoda Hospital">🏥 Yashoda Hospital</option>
+        </optgroup>
+    </select>
+</div>
 
                 <div class="input-group">
                     <label for="dept">Medical Department</label>
