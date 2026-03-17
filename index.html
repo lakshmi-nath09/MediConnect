@@ -22,10 +22,20 @@
                     <input type="text" name="Name" id="userName" placeholder="Enter your full name" required>
                 </div>
 
-                <div class="input-group">
-                    <label>Phone Number</label>
-                    <input type="tel" name="Phone" id="userPhone" placeholder="+1 (555) 000-0000" required>
-                </div>
+               <div class="input-group">
+    <select id="country-code" name="country-code" class="form-select" style="width: 100px;">
+        <option value="+91" selected>🇮🇳 +91</option>
+        <option value="+1">🇺🇸 +1</option>
+        <option value="+44">🇬🇧 +44</option>
+        <option value="+971">🇦🇪 +971</option>
+    </select>
+    
+    <input type="tel" id="phone" name="phone" 
+           placeholder="Enter 10-digit number" 
+           maxlength="10" 
+           oninput="this.value = this.value.replace(/[^0-9]/g, '');" 
+           required>
+</div>
 
                 <div class="input-group">
                     <label>Department</label>
