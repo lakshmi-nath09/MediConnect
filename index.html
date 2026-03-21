@@ -4,12 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MediConnect | Smart Healthcare Booking</title>
+    
+    <script>
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'login.html';
+        }
+    </script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="main-wrapper">
+        <div style="width: 100%; max-width: 450px; display: flex; justify-content: flex-end; margin-bottom: 10px;">
+            <button onclick="sessionStorage.clear(); location.reload();" class="btn-secondary" style="width: auto; padding: 8px 15px; font-size: 0.75rem; border-radius: 20px; border: 1px solid #cbd5e1;">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </button>
+        </div>
+
         <div class="appointment-card">
             <div class="header">
                 <div class="logo">
@@ -27,104 +40,103 @@
 
                 <div class="input-group">
                     <label>Phone Number</label>
-                    <div style="display: flex; gap: 10px;">
-                        <select id="country-code" name="CountryCode" style="width: 100px; border-radius: 8px; border: 1px solid #ddd; background: #fff;">
-                            <option value="+91" selected>🇮🇳 +91</option>
-                            <option value="+1">🇺🇸 +1</option>
-                            <option value="+44">🇬🇧 +44</option>
-                            <option value="+971">🇦🇪 +971</option>
+                    <div class="phone-wrapper">
+                        <select id="country-code" name="CountryCode">
+                            <optgroup label="Popular">
+                                <option value="+91" selected>🇮🇳 +91 (India)</option>
+                                <option value="+1">🇺🇸 +1 (USA/Canada)</option>
+                                <option value="+44">🇬🇧 +44 (UK)</option>
+                                <option value="+971">🇦🇪 +971 (UAE)</option>
+                            </optgroup>
+                            <optgroup label="Global Options">
+                                <option value="+61">🇦🇺 +61 (Australia)</option>
+                                <option value="+880">🇧🇩 +880 (Bangladesh)</option>
+                                <option value="+86">🇨🇳 +86 (China)</option>
+                                <option value="+33">🇫🇷 +33 (France)</option>
+                                <option value="+49">🇩🇪 +49 (Germany)</option>
+                                <option value="+92">🇵🇰 +92 (Pakistan)</option>
+                                <option value="+65">🇸🇬 +65 (Singapore)</option>
+                                <option value="+94">🇱🇰 +94 (Sri Lanka)</option>
+                            </optgroup>
                         </select>
-                        <input type="tel" id="phone" name="Phone" 
-                               placeholder="10-digit number" 
-                               maxlength="10" 
-                               style="flex: 1;"
-                               oninput="this.value = this.value.replace(/[^0-9]/g, '');" 
-                               required>
+                        <input type="tel" id="phone" name="Phone" placeholder="10-digit number" maxlength="10" 
+                               oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
                     </div>
                 </div>
 
                 <div class="input-group">
-    <label>Select Hospital</label>
-    <select name="Hospital" id="hospital" required>
-        <option value="" disabled selected>Choose a hospital</option>
-        
-        <optgroup label="Recommended Nearby" id="nearby-hospitals">
-            <option value="General Hospital">📍 Select location for suggestions</option>
-        </optgroup>
-
-        <optgroup label="Main Branches">
-            <option value="Apollo Hospitals">🏥 Apollo Hospitals</option>
-            <option value="Care Hospitals">🏥 Care Hospitals</option>
-            <option value="Yashoda Hospital">🏥 Yashoda Hospital</option>
-        </optgroup>
-    </select>
-</div>
+                    <label>Select Hospital</label>
+                    <select name="Hospital" id="hospital" required>
+                        <option value="" disabled selected>Choose a hospital</option>
+                        <optgroup label="Recommended Nearby" id="nearby-hospitals">
+                            <option value="">📍 Use 'Find Near Me' for suggestions</option>
+                        </optgroup>
+                        <optgroup label="Main Branches">
+                            <option value="Apollo Hospitals">🏥 Apollo Hospitals</option>
+                            <option value="Care Hospitals">🏥 Care Hospitals</option>
+                            <option value="Yashoda Hospital">🏥 Yashoda Hospital</option>
+                            <option value="AIIMS Center">🏛️ AIIMS Medical Center</option>
+                        </optgroup>
+                    </select>
+                    <button type="button" id="find-location-btn" class="btn-secondary" style="margin-top: 8px;">
+                        <i class="fa-solid fa-location-crosshairs"></i> Find Nearest Hospital
+                    </button>
+                    <p id="location-status" style="font-size: 0.75rem; color: #64748b; text-align: center; margin-top: 5px;"></p>
+                </div>
 
                 <div class="input-group">
                     <label for="dept">Medical Department</label>
                     <select name="Department" id="dept" required>
                         <option value="" disabled selected>Select a department</option>
-                        
-                        <optgroup label="Primary Care">
-                            <option value="General Medicine">🩺 General Medicine</option>
-                            <option value="Pediatrics">👶 Pediatrics (Child Care)</option>
-                            <option value="Emergency">🚨 Emergency Room</option>
-                        </optgroup>
-
                         <optgroup label="Specialized Care">
+                            <option value="General Medicine">🩺 General Medicine</option>
                             <option value="Cardiology">❤️ Cardiology (Heart)</option>
-                            <option value="Neurology">🧠 Neurology (Brain/Nerves)</option>
+                            <option value="Pediatrics">👶 Pediatrics (Child Care)</option>
                             <option value="Orthopedics">🦴 Orthopedics (Bones)</option>
-                            <option value="Dermatology">✨ Dermatology (Skin)</option>
-                        </optgroup>
-
-                        <optgroup label="Diagnostics & Therapy">
-                            <option value="Radiology">🩻 Radiology (X-Ray/MRI)</option>
-                            <option value="Pathology">🧪 Pathology (Lab Tests)</option>
-                            <option value="Physiotherapy">🏃 Physiotherapy</option>
+                            <option value="Neurology">🧠 Neurology (Brain)</option>
                         </optgroup>
                     </select>
                 </div>
 
                 <div class="row">
                     <div class="input-group">
-                        <label for="appDate">Appointment Date</label>
+                        <label for="appDate">Date</label>
                         <input type="date" name="Date" id="appDate" required>
                     </div>
                     <div class="input-group">
-                        <label for="appTime">Preferred Time</label>
+                        <label for="appTime">Time</label>
                         <input type="time" name="Time" id="appTime" required>
                     </div>
                 </div>
 
                 <div class="input-group checkbox-row">
                     <input type="checkbox" id="privacy" required>
-                    <label for="privacy" style="font-size: 0.85rem;">I agree to the privacy policy and data processing.</label>
+                    <label for="privacy" style="font-size: 0.8rem;">I agree to the privacy policy.</label>
                 </div>
 
                 <button type="submit" id="submitBtn">Confirm Appointment</button>
             </form>
 
             <div id="successMessage" class="hidden">
-                <div class="success-icon">
+                <div style="text-align: center; margin-bottom: 20px;">
                     <i class="fa-solid fa-circle-check" style="color: #22c55e; font-size: 3rem;"></i>
+                    <h3>Booking Successful!</h3>
                 </div>
-                <h3>Appointment Confirmed!</h3>
                 
                 <div class="appointment-id-box" id="printableArea">
-                    <p style="margin-bottom: 5px; color: #64748b; font-size: 0.8rem;">OFFICIAL RECEIPT</p>
+                    <p style="margin-bottom: 5px; color: #64748b; font-size: 0.7rem; text-transform: uppercase;">Medical Appointment Receipt</p>
                     <h2 id="displayID" style="color: #1e293b; letter-spacing: 2px;">#CF-0000</h2>
                     <hr style="margin: 15px 0; border: 0; border-top: 1px solid #e2e8f0;">
                     <p id="receiptName" style="font-weight: 600; color: #2563eb;"></p>
                     <p id="receiptDateTime" style="font-size: 0.9rem; color: #475569;"></p>
-                    <p style="font-size: 0.7rem; color: #94a3b8; margin-top: 10px;">MediConnect Digital Health Record</p>
+                    <p style="font-size: 0.7rem; color: #94a3b8; margin-top: 10px;">Generated by MediConnect Digital Portal</p>
                 </div>
 
                 <div class="action-buttons">
                     <button onclick="window.print()" class="btn-print">
                         <i class="fa-solid fa-print"></i> Print Receipt
                     </button>
-                    <button onclick="location.reload()" class="btn-secondary">Book Another</button>
+                    <button onclick="location.reload()" class="btn-secondary">New Booking</button>
                 </div>
             </div>
         </div>
