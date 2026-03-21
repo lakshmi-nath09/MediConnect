@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | MediConnect Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific styles for the login layout */
+        .login-container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="appointment-card">
+            <div class="header">
+                <div class="logo"><i class="fa-solid fa-user-shield"></i></div>
+                <h1>Patient Login</h1>
+                <p>Access your health dashboard</p>
+            </div>
+
+            <form id="loginForm">
+                <div class="input-group">
+                    <label>Patient ID / Email</label>
+                    <input type="text" id="loginUser" placeholder="Enter your ID" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPass" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" id="loginBtn">Login to Portal</button>
+                
+                <p style="text-align: center; margin-top: 15px; font-size: 0.8rem; color: #64748b;">
+                    Don't have an ID? <a href="#" style="color: #007bff; text-decoration: none;">Contact Registration</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const user = document.getElementById('loginUser').value;
+            const pass = document.getElementById('loginPass').value;
+
+            // Simple demo logic: (Replace 'admin' and '1234' with your choice)
+            if(user === "patient01" && pass === "pass123") {
+                // Save login state so they don't have to login again
+                sessionStorage.setItem('isLoggedIn', 'true');
+                window.location.href = 'index.html'; // Redirects to your booking page
+            } else {
+                alert("❌ Invalid Credentials. Try: patient01 / pass123");
+            }
+        });
+    </script>
+</body>
+</html>
